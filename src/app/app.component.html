@@ -1,0 +1,53 @@
+<div class="main-container">
+	<header class="header-2">
+		<div class="branding">
+			<a class="nav-link">
+				<clr-icon shape="home" size="24"></clr-icon>
+				<span class="title">Project Clarity</span>
+			</a>
+		</div>
+		<div class="header-nav">
+			<a class="active nav-link nav-text">Home</a>
+		</div>
+	</header>
+	<div class="content-container">
+		<div class="content-area">
+			<h3>Funky bug on 2nd custom filter in a DataGrid</h3>
+			<p>
+        This may be related to the issue reported in <a href="https://github.com/vmware/clarity/issues/3282">#3282</a>.  All four columns in the Datagrid below use a custom string filter that allows multiple search strings to be entered separated with vertical pipes like <code>WIP|Design review</code> and similar.  It works for every column except for the 2nd.  Pretty spooky.  
+      </p>
+      <clr-datagrid (clrDgRefresh)="dgRefresh($event)">
+        <clr-dg-column [clrDgField]="'family'">
+          Name
+          <clr-dg-string-filter [clrDgStringFilter]="nameOrFilter"></clr-dg-string-filter>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'revision'">
+          Revision
+          <clr-dg-string-filter [clrDgStringFilter]="revisionOrFilter"></clr-dg-string-filter>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'type'">
+          Type
+          <clr-dg-string-filter [clrDgStringFilter]="typeOrFilter"></clr-dg-string-filter>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'status'">
+          Status
+          <clr-dg-string-filter [clrDgStringFilter]="statusOrFilter"></clr-dg-string-filter>
+        </clr-dg-column>
+        
+        <clr-dg-row *clrDgItems="let w of designs">
+          <clr-dg-cell>{{w.name}}</clr-dg-cell>
+          <clr-dg-cell>{{w.revision}}</clr-dg-cell>
+          <clr-dg-cell>{{w.type}}</clr-dg-cell>
+          <clr-dg-cell>{{w.status}}</clr-dg-cell>
+        </clr-dg-row>
+        <!-- <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="15">
+            <clr-dg-page-size [clrPageSizeOptions]="[15,30,100]">Die per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} die
+          </clr-dg-pagination>
+        </clr-dg-footer> -->
+      </clr-datagrid>
+		</div>
+	</div>
+</div>
